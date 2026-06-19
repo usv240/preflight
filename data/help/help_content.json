@@ -1,0 +1,72 @@
+{
+  "_note": "Backend-served help. In UiPath this becomes the Data Service `HelpContent` entity that the [i] info button and 'Take the tour' control bind to. Nothing here is hardcoded in the frontend.",
+  "screens": [
+    {
+      "screenKey": "dashboard",
+      "title": "Dashboard",
+      "whatItIs": "Every discharge case and its live readiness status. Green = proven ready; red = a dependency failed rehearsal; amber = waiting on a human.",
+      "howToUse": "Pick a case and click 'Run Rehearsal' to fork a disposable twin and test the plan before anyone acts.",
+      "nextStep": "Open a case to see its plan and obligations.",
+      "tourSteps": [
+        { "target": "caseTable", "text": "Each row is a real case from the backend (Data Service). No data is typed into this screen." },
+        { "target": "statusChip", "text": "Status updates live as the Maestro process runs." },
+        { "target": "runRehearsalBtn", "text": "This triggers the Preflight rehearsal for the selected case." }
+      ]
+    },
+    {
+      "screenKey": "case",
+      "title": "Case detail",
+      "whatItIs": "The patient's plan (medications, pharmacy, transport, follow-up, instructions) and the obligations compiled from it.",
+      "howToUse": "Review the obligations the compiler derived from policy. Each one becomes an executable test.",
+      "nextStep": "Run a rehearsal to prove or break these obligations.",
+      "tourSteps": [
+        { "target": "planItems", "text": "Promises in the discharge plan — the raw material." },
+        { "target": "obligations", "text": "Executable outcome obligations compiled from the plan + policy (grounded, not invented)." }
+      ]
+    },
+    {
+      "screenKey": "rehearsal",
+      "title": "Rehearsal (live)",
+      "whatItIs": "A live view of the rehearsal: forking the twin, compiling obligations, the chaos agent's attacks, and Test Cloud execution.",
+      "howToUse": "Watch the chaos agent search for failure combinations and see which obligations break.",
+      "nextStep": "If anything fails, you'll be routed to Nurse review; if all pass, the plan is released.",
+      "tourSteps": [
+        { "target": "stepTimeline", "text": "The six rehearsal steps, updating in real time from process state." },
+        { "target": "chaosFeed", "text": "Each adversarial attempt the chaos agent makes, and what it found." }
+      ]
+    },
+    {
+      "screenKey": "evidence",
+      "title": "Evidence pack",
+      "whatItIs": "The proof: the causal failure chain, every obligation result, the audit trail, and the final verdict.",
+      "howToUse": "Trace exactly why the plan was blocked or released. Download the proof for the record.",
+      "nextStep": "Use this as the auditable record of the decision.",
+      "tourSteps": [
+        { "target": "causalGraph", "text": "The chain of dependencies that led to the failure (e.g., transport late -> pharmacy closed -> med not collected)." },
+        { "target": "downloadProof", "text": "Export the evidence pack for governance/audit." }
+      ]
+    },
+    {
+      "screenKey": "nurseReview",
+      "title": "Nurse review",
+      "whatItIs": "The human gate. The blocked obligation, the proposed OPERATIONAL remedy, and your decision.",
+      "howToUse": "Approve the remedy, edit it, or accept a documented exception. Clinical decisions stay with you.",
+      "nextStep": "On approval, Preflight re-runs the rehearsal automatically.",
+      "tourSteps": [
+        { "target": "failedObligation", "text": "What failed and why." },
+        { "target": "proposedRemedy", "text": "An operational fix proposed by an agent — never a clinical decision." },
+        { "target": "decisionButtons", "text": "Approve, edit, or accept a documented exception with your name on it." }
+      ]
+    },
+    {
+      "screenKey": "regression",
+      "title": "Regression library",
+      "whatItIs": "Resolved failures promoted into reusable standing tests, so the same gap can't recur silently.",
+      "howToUse": "Toggle scenarios to include them in future rehearsals.",
+      "nextStep": "Stronger coverage on every future case.",
+      "tourSteps": [
+        { "target": "scenarioList", "text": "Each entry was learned from a real blocked case." }
+      ]
+    }
+  ]
+}

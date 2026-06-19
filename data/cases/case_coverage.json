@@ -1,0 +1,65 @@
+{
+  "patient_alias": "PT-3315 (synthetic)",
+  "note": "100% synthetic. Hidden flaw: a prescribed medication is in stock but NOT covered by the patient's plan, and discharge instructions are in the wrong language for the patient.",
+  "plan_items": [
+    {
+      "type": "med",
+      "promise_text": "Discharge with Apixaban 5mg.",
+      "payload": { "meds": ["apixaban_5"] }
+    },
+    {
+      "type": "pharmacy",
+      "promise_text": "Medication collected at the in-network pharmacy.",
+      "payload": { "pharmacy_ref": "PH-WEST" }
+    },
+    {
+      "type": "transport",
+      "promise_text": "Ride-share transport home.",
+      "payload": { "transport_ref": "TR-40" }
+    },
+    {
+      "type": "followup",
+      "promise_text": "Hematology follow-up within 10 days.",
+      "payload": { "specialty": "hematology", "within_days": 10 }
+    },
+    {
+      "type": "instructions",
+      "promise_text": "Discharge instructions provided to the patient and caregiver.",
+      "payload": { "topic": "anticoagulant safety" }
+    }
+  ],
+  "owners": {
+    "pharmacy": "Discharge Pharmacist (synthetic)",
+    "transport": "Care Coordinator (synthetic)",
+    "followup": "Hematology Scheduler (synthetic)",
+    "instructions": ""
+  },
+  "world": {
+    "meds": ["apixaban_5"],
+    "pharmacy": {
+      "name": "West In-Network Pharmacy (synthetic)",
+      "in_network": true,
+      "opens_at": "08:00",
+      "closes_at": "21:00",
+      "stock": { "apixaban_5": true }
+    },
+    "insurer": {
+      "coverage": { "apixaban_5": false }
+    },
+    "transport": {
+      "booked": true,
+      "pickup_time": "14:00",
+      "travel_minutes": 25,
+      "fallback": false
+    },
+    "scheduling": {
+      "followup_booked": true,
+      "followup_when": "2026-06-26T11:00"
+    },
+    "notification": {
+      "patient_language": "es",
+      "instructions_language": "en",
+      "accessible": true
+    }
+  }
+}

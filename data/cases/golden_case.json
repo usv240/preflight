@@ -1,0 +1,65 @@
+{
+  "patient_alias": "PT-1041 (synthetic)",
+  "note": "DEMO CASE. 100% synthetic. Contains a hidden cross-system flaw: transport arrives at the pharmacy AFTER it closes, so a required medication can never be collected. Looks ready on the surface.",
+  "plan_items": [
+    {
+      "type": "med",
+      "promise_text": "Discharge with Atorvastatin 20mg and Furosemide 40mg, collected on the way home.",
+      "payload": { "meds": ["atorvastatin_20", "furosemide_40"] }
+    },
+    {
+      "type": "pharmacy",
+      "promise_text": "Medication collected at the partner pharmacy en route.",
+      "payload": { "pharmacy_ref": "PH-SOUTH" }
+    },
+    {
+      "type": "transport",
+      "promise_text": "Non-emergency medical transport home, departing after final review.",
+      "payload": { "transport_ref": "TR-77" }
+    },
+    {
+      "type": "followup",
+      "promise_text": "Cardiology follow-up within 7 days.",
+      "payload": { "specialty": "cardiology", "within_days": 7 }
+    },
+    {
+      "type": "instructions",
+      "promise_text": "Discharge instructions provided to the patient and caregiver.",
+      "payload": { "topic": "post-discharge care" }
+    }
+  ],
+  "owners": {
+    "pharmacy": "Discharge Pharmacist (synthetic)",
+    "transport": "Care Coordinator (synthetic)",
+    "followup": "Cardiology Scheduler (synthetic)",
+    "instructions": "Discharge Nurse (synthetic)"
+  },
+  "world": {
+    "meds": ["atorvastatin_20", "furosemide_40"],
+    "pharmacy": {
+      "name": "South Partner Pharmacy (synthetic)",
+      "in_network": true,
+      "opens_at": "09:00",
+      "closes_at": "17:00",
+      "stock": { "atorvastatin_20": true, "furosemide_40": true }
+    },
+    "insurer": {
+      "coverage": { "atorvastatin_20": true, "furosemide_40": true }
+    },
+    "transport": {
+      "booked": true,
+      "pickup_time": "16:40",
+      "travel_minutes": 35,
+      "fallback": true
+    },
+    "scheduling": {
+      "followup_booked": true,
+      "followup_when": "2026-06-24T10:00"
+    },
+    "notification": {
+      "patient_language": "en",
+      "instructions_language": "en",
+      "accessible": true
+    }
+  }
+}

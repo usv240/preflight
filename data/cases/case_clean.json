@@ -1,0 +1,65 @@
+{
+  "patient_alias": "PT-2207 (synthetic)",
+  "note": "100% synthetic. A well-formed plan that should pass rehearsal on the first run (the green path).",
+  "plan_items": [
+    {
+      "type": "med",
+      "promise_text": "Discharge with Amoxicillin 500mg.",
+      "payload": { "meds": ["amoxicillin_500"] }
+    },
+    {
+      "type": "pharmacy",
+      "promise_text": "Medication collected at the in-network pharmacy.",
+      "payload": { "pharmacy_ref": "PH-CENTRAL" }
+    },
+    {
+      "type": "transport",
+      "promise_text": "Family transport home after review.",
+      "payload": { "transport_ref": "TR-12" }
+    },
+    {
+      "type": "followup",
+      "promise_text": "Primary care follow-up within 14 days.",
+      "payload": { "specialty": "primary_care", "within_days": 14 }
+    },
+    {
+      "type": "instructions",
+      "promise_text": "Discharge instructions provided in the patient's language.",
+      "payload": { "topic": "wound care" }
+    }
+  ],
+  "owners": {
+    "pharmacy": "Discharge Pharmacist (synthetic)",
+    "transport": "Care Coordinator (synthetic)",
+    "followup": "PCP Scheduler (synthetic)",
+    "instructions": "Discharge Nurse (synthetic)"
+  },
+  "world": {
+    "meds": ["amoxicillin_500"],
+    "pharmacy": {
+      "name": "Central In-Network Pharmacy (synthetic)",
+      "in_network": true,
+      "opens_at": "08:00",
+      "closes_at": "22:00",
+      "stock": { "amoxicillin_500": true }
+    },
+    "insurer": {
+      "coverage": { "amoxicillin_500": true }
+    },
+    "transport": {
+      "booked": true,
+      "pickup_time": "15:00",
+      "travel_minutes": 30,
+      "fallback": true
+    },
+    "scheduling": {
+      "followup_booked": true,
+      "followup_when": "2026-06-27T09:30"
+    },
+    "notification": {
+      "patient_language": "en",
+      "instructions_language": "en",
+      "accessible": true
+    }
+  }
+}
