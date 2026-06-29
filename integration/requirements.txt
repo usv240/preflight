@@ -1,0 +1,6 @@
+# Optional integration dependencies.
+# The core engine + Data Fabric / Test Manager clients use only the Python standard library.
+# This is needed only for the external-framework red-team agent (redteam_agent.py):
+
+langgraph>=0.2          # external agent framework (LangChain ecosystem) for the red-team StateGraph
+# anthropic>=0.40       # optional: set ANTHROPIC_API_KEY to let the plan node generate creative attacks
