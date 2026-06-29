@@ -45,18 +45,19 @@ class UiPathClient:
         self.base = self.env["UIPATH_BASE_URL"].rstrip("/")
         self.org = self.env["UIPATH_ORG"]
         self.tenant = self.env["UIPATH_TENANT"]
-        self._token: str | None = None
+        self._tokens: dict[str, str] = {}  # cache token per scope string
 
     # ---- auth ----
-    def get_token(self) -> str:
-        if self._token:
-            return self._token
+    def get_token(self, scope: str | None = None) -> str:
+        scope = scope if scope is not None else self.env.get("UIPATH_SCOPES", "")
+        if scope in self._tokens:
+            return self._tokens[scope]
         url = f"{self.base}/identity_/connect/token"
         data = urllib.parse.urlencode({
             "grant_type": "client_credentials",
             "client_id": self.env["UIPATH_APP_ID"],
             "client_secret": self.env["UIPATH_APP_SECRET"],
-            "scope": self.env.get("UIPATH_SCOPES", ""),
+            "scope": scope,
         }).encode()
         req = urllib.request.Request(url, data=data, method="POST")
         req.add_header("Content-Type", "application/x-www-form-urlencoded")
@@ -66,14 +67,15 @@ class UiPathClient:
                 payload = json.loads(r.read().decode())
         except urllib.error.HTTPError as e:
             raise RuntimeError(f"Token request failed {e.code}: {e.read().decode()}") from e
-        self._token = payload["access_token"]
-        return self._token
+        self._tokens[scope] = payload["access_token"]
+        return self._tokens[scope]
 
     # ---- low-level request ----
-    def request(self, method: str, url: str, body: dict | list | None = None) -> tuple[int, object]:
+    def request(self, method: str, url: str, body: dict | list | None = None,
+                scope: str | None = None) -> tuple[int, object]:
         data = json.dumps(body).encode() if body is not None else None
         req = urllib.request.Request(url, data=data, method=method)
-        req.add_header("Authorization", f"Bearer {self.get_token()}")
+        req.add_header("Authorization", f"Bearer {self.get_token(scope)}")
         req.add_header("Content-Type", "application/json")
         req.add_header("Accept", "application/json")
         req.add_header("User-Agent", USER_AGENT)
@@ -140,6 +142,26 @@ class UiPathClient:
     # backward-compatible alias
     def ds_base(self) -> str:
         return self.ds_api()
+
+    # ---- Test Manager helpers ----
+    def tm_api(self) -> str:
+        return f"{self.base}/{self.org}/{self.tenant}/testmanager_/api"
+
+    def tm_request(self, method: str, path: str, body: dict | list | None = None) -> tuple[int, object]:
+        url = f"{self.tm_api()}{path}"
+        return self.request(method, url, body, scope=self.env.get("UIPATH_TM_SCOPES", ""))
+
+    def tm_projects(self) -> list[dict]:
+        st, payload = self.tm_request("GET", "/projects")
+        if st == 200 and isinstance(payload, dict):
+            return payload.get("data", [])
+        return []
+
+    def tm_project_id(self, name: str) -> str | None:
+        for p in self.tm_projects():
+            if p.get("name") == name:
+                return p.get("id") or p.get("key")
+        return None
 
 
 if __name__ == "__main__":

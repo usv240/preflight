@@ -1,0 +1,3899 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Test Management Hub",
+    "description": "Test Management Hub API documentation.",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "/hackathon26_850/DefaultTenant/testmanager_"
+    }
+  ],
+  "paths": {
+    "/api/azuredevopsconnector/{token}/requirements": {
+      "post": {
+        "tags": [
+          "AzureDevOpsWebHook"
+        ],
+        "operationId": "AzureDevOpsWebHook_Requirement",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {}
+            },
+            "application/json": {
+              "schema": {}
+            },
+            "text/json": {
+              "schema": {}
+            },
+            "application/*+json": {
+              "schema": {}
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/azuredevopsconnector/{token}/testcases": {
+      "post": {
+        "tags": [
+          "AzureDevOpsWebHook"
+        ],
+        "operationId": "AzureDevOpsWebHook_TestCase",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {}
+            },
+            "application/json": {
+              "schema": {}
+            },
+            "text/json": {
+              "schema": {}
+            },
+            "application/*+json": {
+              "schema": {}
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/azuredevopsconnector/{token}/isalive": {
+      "get": {
+        "tags": [
+          "AzureDevOpsWebHook"
+        ],
+        "operationId": "AzureDevOpsWebHook_IsAlive",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuration": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "Configuration_GetCurrentConfiguration",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.ConfigDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.ConfigDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.ConfigDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/configuration/featureflags": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "summary": "Get the status of boolean feature flags",
+        "description": "Returns the enabled/disabled status of the specified boolean feature flags. Only supports Bool kind features. If no feature names are provided, returns all boolean feature flags.",
+        "operationId": "Configuration_GetFeatureFlags",
+        "parameters": [
+          {
+            "name": "featureNames",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/configuration/telemetry": {
+      "get": {
+        "tags": [
+          "Configuration"
+        ],
+        "operationId": "Configuration_GetTelemetryConfiguration",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.TelemetryConfigurationDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.TelemetryConfigurationDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.TelemetryConfigurationDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/jiraconnector/{token}/webhook": {
+      "post": {
+        "tags": [
+          "JiraConnectorWebHooks"
+        ],
+        "operationId": "JiraConnectorWebHooks_TriggerWebhook",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "forceCreation",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {}
+            },
+            "application/json": {
+              "schema": {}
+            },
+            "text/json": {
+              "schema": {}
+            },
+            "application/*+json": {
+              "schema": {}
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "Projects_GetProjects",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.ProjectDto]"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/project/search": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "Projects_GetAllProjectsPagedAndSortedWithSearch",
+        "parameters": [
+          {
+            "name": "SortQuery",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "search_token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.ProjectLegacyDto]"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/requirements": {
+      "get": {
+        "tags": [
+          "Requirements"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "Requirements_GetRequirements",
+        "parameters": [
+          {
+            "name": "projectid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "updatedby",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "testcaseid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "changedSince",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.RequirementDto]"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/requirements/{id}/assigntestcases": {
+      "post": {
+        "tags": [
+          "Requirements"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "Requirements_AssignTestCases",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.AssignTestCasesToRequirementRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api": {
+      "get": {
+        "tags": [
+          "ServerInfo"
+        ],
+        "operationId": "ServerInfo_Get",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.WebAPI.Controllers.ServerInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/serverinfo": {
+      "get": {
+        "tags": [
+          "ServerInfo"
+        ],
+        "operationId": "ServerInfo_Get",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.WebAPI.Controllers.ServerInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/servicenowconnector/{token}/requirements": {
+      "post": {
+        "tags": [
+          "ServiceNowWebHook"
+        ],
+        "operationId": "ServiceNowWebHook_Requirement",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {}
+            },
+            "application/json": {
+              "schema": {}
+            },
+            "text/json": {
+              "schema": {}
+            },
+            "application/*+json": {
+              "schema": {}
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/servicenowconnector/{token}/testcases": {
+      "post": {
+        "tags": [
+          "ServiceNowWebHook"
+        ],
+        "operationId": "ServiceNowWebHook_TestCase",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {}
+            },
+            "application/json": {
+              "schema": {}
+            },
+            "text/json": {
+              "schema": {}
+            },
+            "application/*+json": {
+              "schema": {}
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/servicenowconnector/{token}/isalive": {
+      "post": {
+        "tags": [
+          "ServiceNowWebHook"
+        ],
+        "operationId": "ServiceNowWebHook_IsAlive",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/testcases": {
+      "get": {
+        "tags": [
+          "TestCases"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "TestCases_GetTestCases",
+        "parameters": [
+          {
+            "name": "projectid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "testsetid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "requirementid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "onlynotautomated",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "updatedby",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "changedSince",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseDto]"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      },
+      "post": {
+        "tags": [
+          "TestCases"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "TestCases_Create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.CreateTestCaseV1Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/testcase/project/{id}/search": {
+      "get": {
+        "tags": [
+          "TestCases"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "TestCases_GetTestCasesByProjectIdPagedAndSortedWithSearchLegacy",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "SortQuery",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "search_token",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includewithsetautomationid",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseLegacyDto]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/testcase/setautomationid": {
+      "put": {
+        "tags": [
+          "TestCases"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "TestCases_UpdateTestCaseAutomationIdLegacy",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.Commands.UpdateTestCaseAutomationLegacy"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseLegacyDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseLegacyDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseLegacyDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/testcase": {
+      "post": {
+        "tags": [
+          "TestCases"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "TestCases_CreateLegacy",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.Commands.CreateTestCaseLegacy"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseLegacyDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseLegacyDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseLegacyDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/testcases/{id}": {
+      "get": {
+        "tags": [
+          "TestCases"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "TestCases_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/testcases/automation/{id}": {
+      "get": {
+        "tags": [
+          "TestCases"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "TestCases_GetTestCaseByAutomationId",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/testcases/{id}/updateautomation": {
+      "post": {
+        "tags": [
+          "TestCases"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "TestCases_UpdateTestCaseAutomation",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.UpdateTestCaseAutomationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/thirdpartyauth/tokenforapplicationid": {
+      "get": {
+        "tags": [
+          "ThirdPartyAuth"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "ThirdPartyAuth_GetTokenForApplication",
+        "parameters": [
+          {
+            "name": "application",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/thirdpartyauth/applicationdiscovery": {
+      "get": {
+        "tags": [
+          "ThirdPartyAuth"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "ThirdPartyAuth_GetApplications",
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/userauth/userdata": {
+      "get": {
+        "tags": [
+          "UserAuth"
+        ],
+        "operationId": "UserAuth_GetUserData",
+        "responses": {
+          "500": {
+            "description": "Server Error"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_GetById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_UpdateUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UpdateUserRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UpdateUserRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UpdateUserRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UpdateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_PatchUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.JsonPatch.Operations.Operation"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.JsonPatch.Operations.Operation"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.JsonPatch.Operations.Operation"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.JsonPatch.Operations.Operation"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_GetUsers",
+        "parameters": [
+          {
+            "name": "isactive",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "hasrequestedaccess",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "isadmin",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1[UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDto]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/request-access": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "operationId": "Users_RequestAccess",
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/usermanagement/getuserdata": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "\nThis endpoint is deprecated. Please use /api/v2/* endpoint instead.",
+        "operationId": "Users_GetLegacyUserData",
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserLegacyDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserLegacyDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserLegacyDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/usersettings/{id}": {
+      "get": {
+        "tags": [
+          "UserSettings"
+        ],
+        "operationId": "UserSettings_Get",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDataDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDataDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDataDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "UserSettings"
+        ],
+        "operationId": "UserSettings_Update",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UpdateUserDataRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "UserSettings"
+        ],
+        "operationId": "UserSettings_Patch",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.JsonPatch.Operations.Operation"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/api/webhookconnector/{token}/defects": {
+      "post": {
+        "tags": [
+          "WebHookConnector"
+        ],
+        "operationId": "WebHookConnector_Defect",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.WebHook.Connector.Abstractions.DTOs.UpdateDefectRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.WebHook.Connector.Abstractions.DTOs.UpdateDefectRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.WebHook.Connector.Abstractions.DTOs.UpdateDefectRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.WebHook.Connector.Abstractions.DTOs.UpdateDefectRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/webhookconnector/{token}/isalive": {
+      "post": {
+        "tags": [
+          "WebHookConnector"
+        ],
+        "operationId": "WebHookConnector_IsAlive",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/xrayconnector/{token}/webhook": {
+      "post": {
+        "tags": [
+          "XRayConnectorWebhooks"
+        ],
+        "operationId": "XRayConnectorWebhooks_TriggerWebhook",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "forceCreation",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {}
+            },
+            "application/json": {
+              "schema": {}
+            },
+            "text/json": {
+              "schema": {}
+            },
+            "application/*+json": {
+              "schema": {}
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Microsoft.AspNetCore.JsonPatch.Operations.Operation": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "nullable": true
+          },
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "op": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Microsoft.AspNetCore.Mvc.ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": {}
+      },
+      "UiPath.Platform.Rbac.Common.Enums.IdentityObjectType": {
+        "enum": [
+          "user",
+          "localUser",
+          "localGroup",
+          "directoryUser",
+          "directoryGroup",
+          "robot",
+          "robotAccount",
+          "directoryRobotAccount",
+          "directoryRobotUser"
+        ],
+        "type": "string"
+      },
+      "UiPath.TestManagementHub.Common.Configurations.AzureDevopsNugetFeedConfiguration": {
+        "type": "object",
+        "properties": {
+          "OrganizationName": {
+            "type": "string",
+            "default": "uipath",
+            "nullable": true
+          },
+          "ProjectName": {
+            "type": "string",
+            "default": "Public.Feeds",
+            "nullable": true
+          },
+          "FeedName": {
+            "type": "string",
+            "default": "UiPath-Internal",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.Configurations.SearchProvider": {
+        "enum": [
+          "none",
+          "luceneNet",
+          "sqlServer"
+        ],
+        "type": "string"
+      },
+      "UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1.PagingDto[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.ProjectDto]": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "returned": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "previousPage": {
+            "type": "boolean"
+          },
+          "nextPage": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1.PagingDto[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.ProjectLegacyDto]": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "returned": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "previousPage": {
+            "type": "boolean"
+          },
+          "nextPage": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1.PagingDto[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.RequirementDto]": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "returned": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "previousPage": {
+            "type": "boolean"
+          },
+          "nextPage": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1.PagingDto[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseDto]": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "returned": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "previousPage": {
+            "type": "boolean"
+          },
+          "nextPage": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1.PagingDto[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseLegacyDto]": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "returned": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "previousPage": {
+            "type": "boolean"
+          },
+          "nextPage": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1.PagingDto[UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDto]": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "returned": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "previousPage": {
+            "type": "boolean"
+          },
+          "nextPage": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.ProjectDto]": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.ProjectDto"
+            },
+            "nullable": true
+          },
+          "paging": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1.PagingDto[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.ProjectDto]"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.ProjectLegacyDto]": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.ProjectLegacyDto"
+            },
+            "nullable": true
+          },
+          "paging": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1.PagingDto[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.ProjectLegacyDto]"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.RequirementDto]": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.RequirementDto"
+            },
+            "nullable": true
+          },
+          "paging": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1.PagingDto[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.RequirementDto]"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseDto]": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseDto"
+            },
+            "nullable": true
+          },
+          "paging": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1.PagingDto[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseDto]"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseLegacyDto]": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseLegacyDto"
+            },
+            "nullable": true
+          },
+          "paging": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1.PagingDto[UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseLegacyDto]"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1[UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDto]": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDto"
+            },
+            "nullable": true
+          },
+          "paging": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.DTOs.PagingModelDto`1.PagingDto[UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDto]"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Common.Enums.CloudEnvironment": {
+        "enum": [
+          "none",
+          "nonGov",
+          "gov",
+          "community"
+        ],
+        "type": "string"
+      },
+      "UiPath.TestManagementHub.Common.Enums.DeploymentEnvironment": {
+        "enum": [
+          "cloud",
+          "dedicatedCloud",
+          "automationSuite"
+        ],
+        "type": "string"
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.AISolutionsConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "aISolutionsSupportedDocumentTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "aISolutionsSupportedImportDocumentTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "attachmentUploadForImportExpirationInDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxAttachmentSizeInMB": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.ApplicationConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "maxObjectCountPerRequest": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxItemCountPerObject": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "azureDevopsNugetFeedConfiguration": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.Configurations.AzureDevopsNugetFeedConfiguration"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.BasicConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "endpoint": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.ConfigDto": {
+        "type": "object",
+        "properties": {
+          "endpoints": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.EndpointsDto"
+          },
+          "basicConfiguration": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.BasicConfigurationDto"
+          },
+          "identityServerConfiguration": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.IdentityServerConfigurationDto"
+          },
+          "storageConfiguration": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.StorageConfigurationDto"
+          },
+          "searchConfiguration": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.SearchConfigurationDto"
+          },
+          "platformConfiguration": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.PlatformConfigurationDto"
+          },
+          "oauthConnectorConfiguration": {
+            "type": "object",
+            "properties": {
+              "azureDevOps": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OAuthConnectorConfigurationDto"
+              },
+              "jiraServer": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OAuthConnectorConfigurationDto"
+              },
+              "jiraCloudBasicAuth": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OAuthConnectorConfigurationDto"
+              },
+              "jiraCloudOAuth": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OAuthConnectorConfigurationDto"
+              },
+              "serviceNow": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OAuthConnectorConfigurationDto"
+              },
+              "webHook": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OAuthConnectorConfigurationDto"
+              },
+              "xRay": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OAuthConnectorConfigurationDto"
+              },
+              "xrayCloud": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OAuthConnectorConfigurationDto"
+              },
+              "redmine": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OAuthConnectorConfigurationDto"
+              },
+              "qtest": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OAuthConnectorConfigurationDto"
+              },
+              "sap": {
+                "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OAuthConnectorConfigurationDto"
+              }
+            },
+            "additionalProperties": false,
+            "nullable": true
+          },
+          "applicationConfiguration": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.ApplicationConfigurationDto"
+          },
+          "projectMigrationConfiguration": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.ProjectMigrationConfigurationDto"
+          },
+          "aISolutionsConfiguration": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.AISolutionsConfigurationDto"
+          },
+          "signalRConfiguration": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.SignalRConfigurationDto"
+          },
+          "orchestratorConfiguration": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OrchestratorConfigurationDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.EndpointsDto": {
+        "type": "object",
+        "properties": {
+          "AuthLocation": {
+            "type": "string",
+            "nullable": true
+          },
+          "TaskCaptureEndpoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "SwaggerEndpoint": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.IdentityServerConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "authority": {
+            "type": "string",
+            "nullable": true
+          },
+          "identityServerClientId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OAuthConnectorConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.OrchestratorConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "pollLogsIntervalInSeconds": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.PlatformConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "cloudEnabled": {
+            "type": "boolean"
+          },
+          "cloudEnvironment": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.Enums.CloudEnvironment"
+          },
+          "integrationEnabled": {
+            "type": "boolean"
+          },
+          "accountKey": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "accountName": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenantKey": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "tenantName": {
+            "type": "string",
+            "nullable": true
+          },
+          "tokenTimeoutOffsetMinutes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "deploymentEnvironment": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.Enums.DeploymentEnvironment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.ProjectMigrationConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "projectMigrationAttachmentMaxSizeInMB": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.SearchConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "searchProvider": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.Common.Configurations.SearchProvider"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.SignalRConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.StorageConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "uploadSizeLimit": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.Configuration.Abstractions.DTOs.TelemetryConfigurationDto": {
+        "type": "object",
+        "properties": {
+          "instrumentationKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "connectionString": {
+            "type": "string",
+            "nullable": true
+          },
+          "cloudRoleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.TestManagement.Abstractions.Commands.CreateTestCaseLegacy": {
+        "type": "object",
+        "properties": {
+          "correlation_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "project_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "input_params": {
+            "type": "string",
+            "nullable": true
+          },
+          "automation_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "container_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "foreign_reference": {
+            "type": "string",
+            "nullable": true
+          },
+          "connector_test_case_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "preCondition": {
+            "type": "string",
+            "nullable": true
+          },
+          "postCondition": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageEntryPointUniqueId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "packageIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageEntryPointName": {
+            "type": "string",
+            "nullable": true
+          },
+          "feedId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "packageSourceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "automationTestCaseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "automationProjectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isHidden": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.TestManagement.Abstractions.Commands.UpdateTestCaseAutomationLegacy": {
+        "type": "object",
+        "properties": {
+          "correlation_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "test_case_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "automation_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "automation_test_case_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "automation_project_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "studioWebProjectId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "studioWebFileId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.AssignTestCasesToRequirementRequest": {
+        "type": "object",
+        "properties": {
+          "testCaseIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.CreateTestCaseV1Request": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "inputParams": {
+            "type": "string",
+            "nullable": true
+          },
+          "automationId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "containerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "foreignReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "connectorTestCaseId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.CustomLabels": {
+        "type": "object",
+        "properties": {
+          "CustomLabel": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.ProjectDto": {
+        "type": "object",
+        "properties": {
+          "projectPrefix": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAuthorizationEnabled": {
+            "type": "boolean"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "isSapConfigured": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.ProjectLegacyDto": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "updated_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "project_prefix": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAuthorizationEnabled": {
+            "type": "boolean"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "isSapConfigured": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.RequirementDto": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "objKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "containerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "foreignReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "connectorRequirementId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "customFieldLabels": {
+            "$ref": "#/components/schemas/UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.CustomLabels"
+          },
+          "customFieldValues": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string",
+              "nullable": true
+            },
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseDto": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "objKey": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "preCondition": {
+            "type": "string",
+            "nullable": true
+          },
+          "inputParams": {
+            "type": "string",
+            "nullable": true
+          },
+          "automationId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "containerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "automationTestCaseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "automationProjectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "foreignReference": {
+            "type": "string",
+            "nullable": true
+          },
+          "connectorTestCaseId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "isAutomated": {
+            "type": "boolean"
+          },
+          "packageVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "postCondition": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageEntryPointUniqueId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "packageIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageEntryPointName": {
+            "type": "string",
+            "nullable": true
+          },
+          "feedId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "packageSourceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "studioWebProjectId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "studioWebFileId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "isHidden": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.TestCaseLegacyDto": {
+        "type": "object",
+        "properties": {
+          "created_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "updated_by": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "project_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "obj_key": {
+            "type": "string",
+            "nullable": true
+          },
+          "input_params": {
+            "type": "string",
+            "nullable": true
+          },
+          "automation_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "container_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "automation_test_case_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "automation_project_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "foreign_reference": {
+            "type": "string",
+            "nullable": true
+          },
+          "connector_test_case_id": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "preCondition": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAutomated": {
+            "type": "boolean"
+          },
+          "packageVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "postCondition": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageEntryPointUniqueId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "packageIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "packageEntryPointName": {
+            "type": "string",
+            "nullable": true
+          },
+          "feedId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "packageSourceName": {
+            "type": "string",
+            "nullable": true
+          },
+          "studioWebProjectId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "studioWebFileId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "isHidden": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.TestManagement.Abstractions.DTOs.UpdateTestCaseAutomationRequest": {
+        "type": "object",
+        "properties": {
+          "automationId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "automationTestCaseName": {
+            "type": "string",
+            "nullable": true
+          },
+          "automationProjectName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UpdateUserDataRequest": {
+        "type": "object",
+        "properties": {
+          "language": {
+            "type": "string",
+            "nullable": true
+          },
+          "settings": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UpdateUserRequest": {
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "hasRequestedAccess": {
+            "type": "boolean"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDataDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "language": {
+            "type": "string",
+            "nullable": true
+          },
+          "settings": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          },
+          "hasRequestedAccess": {
+            "type": "boolean"
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isLicensed": {
+            "type": "boolean"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "identityProviderId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "objectType": {
+            "$ref": "#/components/schemas/UiPath.Platform.Rbac.Common.Enums.IdentityObjectType"
+          },
+          "isTestCloudLicensed": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.UserManagement.Abstractions.DTOs.UserLegacyDto": {
+        "type": "object",
+        "properties": {
+          "user_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "is_admin": {
+            "type": "boolean"
+          },
+          "has_requested_access": {
+            "type": "boolean"
+          },
+          "first_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "last_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "isLicensed": {
+            "type": "boolean"
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "identityProviderId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "objectType": {
+            "$ref": "#/components/schemas/UiPath.Platform.Rbac.Common.Enums.IdentityObjectType"
+          },
+          "isTestCloudLicensed": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.WebAPI.Controllers.ServerInfo": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UiPath.TestManagementHub.WebHook.Connector.Abstractions.DTOs.UpdateDefectRequest": {
+        "type": "object",
+        "properties": {
+          "tmDefectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "key": {
+            "type": "string",
+            "nullable": true
+          },
+          "url": {
+            "type": "string",
+            "nullable": true
+          },
+          "correlationId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "Bearer"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}
