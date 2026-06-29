@@ -106,6 +106,37 @@ class UiPathClient:
         url = f"{self.ds_api()}/EntityService/{entity}/read"
         return self.request("GET", url, None)
 
+    def query(self, entity: str, field: str | None = None, op: str = "=",
+              value: str = "") -> list[dict]:
+        """Query records, optionally filtered by one field. Returns the value list."""
+        url = f"{self.ds_api()}/EntityService/{entity}/query"
+        body: dict = {}
+        if field is not None:
+            body = {"filterGroup": {"logicalOperator": 0,
+                                    "queryFilters": [{"fieldName": field, "operator": op, "value": value}]}}
+        status, payload = self.request("POST", url, body)
+        if status == 200 and isinstance(payload, dict):
+            return payload.get("value", [])
+        return []
+
+    def update_record(self, entity: str, record_id: str, record: dict) -> tuple[int, object]:
+        url = f"{self.ds_api()}/EntityService/{entity}/update/{record_id}"
+        return self.request("POST", url, record)
+
+    def delete_record(self, entity: str, record_id: str) -> tuple[int, object]:
+        url = f"{self.ds_api()}/EntityService/{entity}/delete/{record_id}"
+        return self.request("DELETE", url, None)
+
+    def delete_where(self, entity: str, field: str, value: str) -> int:
+        """Delete all records of an entity matching field=value. Returns count deleted."""
+        rows = self.query(entity, field, "=", value)
+        n = 0
+        for r in rows:
+            st, _ = self.delete_record(entity, r["Id"])
+            if st == 200:
+                n += 1
+        return n
+
     # backward-compatible alias
     def ds_base(self) -> str:
         return self.ds_api()
