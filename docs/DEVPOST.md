@@ -18,7 +18,7 @@ discovered *after* it has already harmed someone. Software is tested before it s
 Preflight is an **agentic software-testing system** for the *outcome of a live case*. Before a high-stakes
 plan executes, it:
 1. **Compiles** the governing policy + the case's facts into executable **outcome obligations**.
-2. **Generates a Test Manager test case for every obligation** (policy → test scenarios, automatically).
+2. **Generates a Test Manager test case for every obligation** (policy → test scenarios, automatically) and links them all to a governing **Requirement** ("Safe Discharge Readiness Policy", PRF:10) so every test has traceable coverage from the source policy.
 3. Runs an **adversarial "chaos" agent** that mutates dependencies and searches for *cross-system* failure
    cascades a static checklist would miss.
 4. **Proves** each obligation, produces an auditable **evidence pack** with the causal failure chain, and
@@ -47,7 +47,7 @@ discharge, a nurse approves switching to a 24-hour pharmacy, Preflight **re-test
   the same logic and lets anyone verify the core behavior in seconds.
 
 ## UiPath components used
-- **UiPath Test Manager (Test Cloud)** — agentic test-case generation from policy/obligations (9 test cases).
+- **UiPath Test Manager (Test Cloud)** — agentic test-case generation from policy/obligations (9 severity-tagged test cases), all linked to a governing **Requirement** (PRF:10) for policy-to-test traceability.
 - **UiPath Data Fabric (Data Service)** — entities, records, live query/insert/update via REST API.
 - **UiPath Agent Builder (Studio Web)** — published low-code **Obligation Compiler** agent.
 - **Coded agent** (UiPath for Coding Agents / **Claude Code**) — the rehearsal engine + integrations (bonus).

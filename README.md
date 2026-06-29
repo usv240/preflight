@@ -42,7 +42,7 @@ medication can never be collected — a three-system cascade no static checklist
 ## UiPath components used
 | Component | Role in Preflight |
 |---|---|
-| **UiPath Test Manager (Test Cloud)** | Agentic test-case generation — one severity-tagged test case per obligation, under the `Preflight` project. |
+| **UiPath Test Manager (Test Cloud)** | Agentic test-case generation — one severity-tagged test case per obligation, under the `Preflight` project. All 9 test cases linked to the governing **Requirement** (PRF:10 "Safe Discharge Readiness Policy") for full traceability from policy → test case. |
 | **UiPath Data Fabric (Data Service)** | System of record: `DischargeCase`, `Obligation`, `EvidencePack`, `HumanDecision`, `HelpContent`. Live query/insert/update via REST. No hardcoded data. |
 | **UiPath Agent Builder (Studio Web)** | Published low-code **Obligation Compiler** agent — turns a discharge plan + policy into structured obligations (the "requirements → test scenarios" step). |
 | **Coded agent** (UiPath for Coding Agents / Claude Code) | The rehearsal engine: compiler, chaos search, evaluator, remedy, evidence + the Data Fabric / Test Manager integrations. |
@@ -70,6 +70,7 @@ preflight/
 │   ├── seed_data.py       # seed synthetic cases + help content into Data Fabric
 │   ├── rehearse_case.py    # rehearsal coded agent: block / release stages (writes back to Data Fabric)
 │   ├── tm_sync.py         # generate Test Manager test cases from a case's obligations
+│   ├── requirements_sync.py # link test cases to governing Requirement in Test Manager
 │   ├── redteam_agent.py   # external-framework (LangGraph) red-team agent, governed by UiPath
 │   ├── control_view.py    # live rehearsal status read from Data Fabric + Test Manager
 │   └── build_dashboard.py # generate the live web dashboard (HTML) from Data Fabric + Test Manager
@@ -96,6 +97,7 @@ python scripts/run_demo.py golden_case      # narrated block → remedy → re-t
 ```bash
 python integration/seed_data.py            # seed Data Fabric (one-time)
 python integration/tm_sync.py              # generate Test Manager test cases
+python integration/requirements_sync.py    # link test cases to governing Requirement (policy traceability)
 python integration/rehearse_case.py block   # rehearse → catch flaw → BLOCK the case
 python integration/redteam_agent.py         # external-framework (LangGraph) red-team attacks (writes findings to Data Fabric)
 python integration/build_dashboard.py       # generate the live web dashboard (out/preflight_dashboard.html)
