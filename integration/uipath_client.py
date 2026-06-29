@@ -72,13 +72,15 @@ class UiPathClient:
 
     # ---- low-level request ----
     def request(self, method: str, url: str, body: dict | list | None = None,
-                scope: str | None = None) -> tuple[int, object]:
+                scope: str | None = None, extra_headers: dict | None = None) -> tuple[int, object]:
         data = json.dumps(body).encode() if body is not None else None
         req = urllib.request.Request(url, data=data, method=method)
         req.add_header("Authorization", f"Bearer {self.get_token(scope)}")
         req.add_header("Content-Type", "application/json")
         req.add_header("Accept", "application/json")
         req.add_header("User-Agent", USER_AGENT)
+        for k, v in (extra_headers or {}).items():
+            req.add_header(k, v)
         try:
             with urllib.request.urlopen(req, timeout=60) as r:
                 raw = r.read().decode()
