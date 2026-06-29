@@ -37,12 +37,15 @@ Critical fail → withhold discharge → nurse approves an **operational** remed
 Re-test → **100%, GREEN, Released** + 8 reusable regression scenarios.
 **"We don't predict safety. We prove every dependency survived rehearsal."**
 
-## Slide 8 — Built on UiPath (+ coding-agent bonus)
-- **Test Manager (Test Cloud)** — agentic test-case generation
+## Slide 8 — Built on UiPath (deep + a blend of agents)
+- **Test Manager (Test Cloud)** — agentic test-case generation (9 test cases)
 - **Data Fabric** — live system of record (no hardcoded data)
-- **UiPath for Coding Agents (Claude Code)** — built the whole rehearsal engine ✅ bonus
-- **Identity / External Apps** — OAuth-secured API
-Reproducible: 6/6 tests, live block→release on the platform.
+- **Agent Builder** — published low-code Obligation Compiler agent
+- **Coded agent** via **UiPath for Coding Agents (Claude Code)** — the rehearsal engine ✅ bonus
+- **External framework — LangGraph** red-team agent, governed by UiPath
+- **UiPath Apps** + live `[i]`-help dashboard · **Identity/External Apps** OAuth
+→ low-code **+** coded **+** external **+** coding agent — the exact blend the rubric rewards.
+Reproducible: 6/6 tests, live block→release, red-team writes findings to Data Fabric.
 
 ## Slide 9 — Impact & roadmap
 Wedge: hospital discharge (CMS readmissions, AHRQ RED).

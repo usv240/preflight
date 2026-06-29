@@ -47,14 +47,18 @@ discharge, a nurse approves switching to a 24-hour pharmacy, Preflight **re-test
   the same logic and lets anyone verify the core behavior in seconds.
 
 ## UiPath components used
-- **UiPath Test Manager (Test Cloud)** — agentic test-case generation from policy/obligations.
+- **UiPath Test Manager (Test Cloud)** — agentic test-case generation from policy/obligations (9 test cases).
 - **UiPath Data Fabric (Data Service)** — entities, records, live query/insert/update via REST API.
-- **UiPath for Coding Agents (Claude Code)** — built the rehearsal engine + integrations (bonus).
+- **UiPath Agent Builder (Studio Web)** — published low-code **Obligation Compiler** agent.
+- **Coded agent** (UiPath for Coding Agents / **Claude Code**) — the rehearsal engine + integrations (bonus).
+- **External agent framework — LangGraph (LangChain)** — the adversarial red-team agent, governed by UiPath.
+- **UiPath Apps** + a live backend-driven dashboard with an `[i]` help system from the `HelpContent` entity.
 - **UiPath Identity + External Applications** — OAuth client-credentials API access.
 
 ## Agent type
-**Both** — a **coded agent** (the rehearsal engine, built via UiPath for Coding Agents) operating over
-UiPath-native services (Data Fabric, Test Manager).
+**Both — and a blend.** A published **low-code agent** (Agent Builder) **+** a **coded agent** (rehearsal
+engine, built via UiPath for Coding Agents) **+** an **external-framework agent** (LangGraph red-team)
+governed by UiPath Data Fabric. Exactly the "blend native + external + coding agents" the hackathon rewards.
 
 ## Coding-agent evidence (for the bonus)
 The entire rehearsal engine, synthetic data, tests, and UiPath integrations were generated with **Claude

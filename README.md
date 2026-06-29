@@ -44,15 +44,19 @@ medication can never be collected — a three-system cascade no static checklist
 |---|---|
 | **UiPath Test Manager (Test Cloud)** | Agentic test-case generation — one severity-tagged test case per obligation, under the `Preflight` project. |
 | **UiPath Data Fabric (Data Service)** | System of record: `DischargeCase`, `Obligation`, `EvidencePack`, `HumanDecision`, `HelpContent`. Live query/insert/update via REST. No hardcoded data. |
-| **UiPath for Coding Agents (Claude Code)** | Built the entire rehearsal engine + integrations. See [docs/CODING_AGENT_EVIDENCE.md](docs/CODING_AGENT_EVIDENCE.md). |
+| **UiPath Agent Builder (Studio Web)** | Published low-code **Obligation Compiler** agent — turns a discharge plan + policy into structured obligations (the "requirements → test scenarios" step). |
+| **Coded agent** (UiPath for Coding Agents / Claude Code) | The rehearsal engine: compiler, chaos search, evaluator, remedy, evidence + the Data Fabric / Test Manager integrations. |
+| **External agent framework — LangGraph (LangChain)** | The adversarial **red-team agent** (`plan→attack→judge→record` StateGraph), governed by UiPath: reads the case and writes findings back to Data Fabric. |
+| **UiPath Apps + live dashboard** | A backend-driven UI (App Studio app + a live web dashboard reading Data Fabric/Test Manager) with an `[i]` help system served from the `HelpContent` entity. |
 | **UiPath Identity / External Applications** | OAuth client-credentials auth for all platform API access. |
 
-**Agent type: coded agent** (the rehearsal engine), built via UiPath for Coding Agents, operating over
-UiPath-native services (Data Fabric + Test Manager).
+**Agent types: BOTH (and more).** Low-code (**Agent Builder** Obligation Compiler) **+** coded (rehearsal
+engine, built via **UiPath for Coding Agents**) **+** an **external framework** (LangGraph red-team agent)
+governed by UiPath. Claude Code (coding agent) built the solution — see
+[docs/CODING_AGENT_EVIDENCE.md](docs/CODING_AGENT_EVIDENCE.md).
 
-**Production roadmap (designed):** wrap the agent in a **Maestro BPMN** process with a **DMN** release gate
-and an **Action Center** nurse task, and a **UiPath Apps** front end bound to Data Fabric with contextual
-`[i]` help on every screen.
+**Production roadmap (designed):** wrap the flow in a **Maestro BPMN** process with a **DMN** release gate
+and an **Action Center** nurse task; report results into Test Cloud via Orchestrator Test Automation.
 
 ---
 
@@ -66,7 +70,9 @@ preflight/
 │   ├── seed_data.py       # seed synthetic cases + help content into Data Fabric
 │   ├── rehearse_case.py    # rehearsal coded agent: block / release stages (writes back to Data Fabric)
 │   ├── tm_sync.py         # generate Test Manager test cases from a case's obligations
-│   └── control_view.py    # live rehearsal status read from Data Fabric + Test Manager
+│   ├── redteam_agent.py   # external-framework (LangGraph) red-team agent, governed by UiPath
+│   ├── control_view.py    # live rehearsal status read from Data Fabric + Test Manager
+│   └── build_dashboard.py # generate the live web dashboard (HTML) from Data Fabric + Test Manager
 ├── data/              # synthetic cases, discharge policy, help/tour content
 ├── scripts/run_demo.py  tests/test_end_to_end.py
 └── docs/              # UiPath mapping, coding-agent evidence, demo script, Devpost, deck
@@ -91,10 +97,14 @@ python scripts/run_demo.py golden_case      # narrated block → remedy → re-t
 python integration/seed_data.py            # seed Data Fabric (one-time)
 python integration/tm_sync.py              # generate Test Manager test cases
 python integration/rehearse_case.py block   # rehearse → catch flaw → BLOCK the case
+python integration/redteam_agent.py         # external-framework (LangGraph) red-team attacks (writes findings to Data Fabric)
+python integration/build_dashboard.py       # generate the live web dashboard (out/preflight_dashboard.html)
 python integration/control_view.py          # live status: RED / Blocked + causal chain
 python integration/rehearse_case.py release # apply approved remedy → re-test → RELEASE
-python integration/control_view.py          # live status: GREEN / Released
+python integration/build_dashboard.py        # regenerate → dashboard flips to GREEN / Released
 ```
+Open `out/preflight_dashboard.html` in a browser for the backend-driven UI with `[i]` help.
+External-framework agent needs `pip install -r integration/requirements.txt` (langgraph).
 
 ## Safety & data
 100% synthetic data; no real PHI/PII. Preflight validates **operational readiness only**; it does **not**
