@@ -23,9 +23,11 @@ the UiPath platform — and the synthetic data and tests that prove it works:
 | Evidence pack | `engine/evidence.py` — auditable proof with causal chains. |
 | Synthetic data | `data/cases/*.json`, `data/policy/discharge_policy.md`, `data/help/help_content.json`. |
 | Tests + demo | `tests/test_end_to_end.py` (6 passing tests), `scripts/run_demo.py`. |
+| **UiPath platform integration** | `integration/uipath_client.py` (OAuth + Data Fabric + Test Manager REST), `integration/seed_data.py`, `integration/rehearse_case.py` (block/release coded agent), `integration/tm_sync.py` (Test Manager test-case generation), `integration/control_view.py` (live status). |
 
-The coding agent also produced the architecture and platform mapping in `docs/UIPATH_MAPPING.md` and the
-project design docs.
+The coding agent also produced the architecture and platform mapping in `docs/UIPATH_MAPPING.md`, drove the
+discovery of the Data Fabric and Test Manager REST endpoints + OAuth scopes, and authored the submission
+artifacts (`docs/DEMO_SCRIPT.md`, `docs/DEVPOST.md`, `docs/DECK.md`).
 
 ## (c) Verifiable evidence
 - **This entire engine is the output** — every file under `engine/`, `data/`, `tests/`, `scripts/` was
