@@ -47,7 +47,7 @@ medication can never be collected — a three-system cascade no static checklist
 | **UiPath Agent Builder (Studio Web)** | Published low-code **Obligation Compiler** agent — turns a discharge plan + policy into structured obligations (the "requirements → test scenarios" step). |
 | **Coded agent** (UiPath for Coding Agents / Claude Code) | The rehearsal engine: compiler, chaos search, evaluator, remedy, evidence + the Data Fabric / Test Manager integrations. |
 | **External agent framework — LangGraph (LangChain)** | The adversarial **red-team agent** (`plan→attack→judge→record` StateGraph), governed by UiPath: reads the case and writes findings back to Data Fabric. |
-| **UiPath Apps + live dashboard** | A backend-driven UI (App Studio app + a live web dashboard reading Data Fabric/Test Manager) with an `[i]` help system served from the `HelpContent` entity. |
+| **Live dashboard** | A backend-driven web dashboard reading Data Fabric + Test Manager live, with an `[i]` contextual help system served from the `HelpContent` entity. |
 | **UiPath Identity / External Applications** | OAuth client-credentials auth for all platform API access. |
 
 **Agent types: BOTH (and more).** Low-code (**Agent Builder** Obligation Compiler) **+** coded (rehearsal

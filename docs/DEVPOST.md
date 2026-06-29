@@ -52,7 +52,7 @@ discharge, a nurse approves switching to a 24-hour pharmacy, Preflight **re-test
 - **UiPath Agent Builder (Studio Web)** — published low-code **Obligation Compiler** agent.
 - **Coded agent** (UiPath for Coding Agents / **Claude Code**) — the rehearsal engine + integrations (bonus).
 - **External agent framework — LangGraph (LangChain)** — the adversarial red-team agent, governed by UiPath.
-- **UiPath Apps** + a live backend-driven dashboard with an `[i]` help system from the `HelpContent` entity.
+- **Live backend-driven dashboard** reading Data Fabric + Test Manager live, with an `[i]` contextual help system sourced from the `HelpContent` entity.
 - **UiPath Identity + External Applications** — OAuth client-credentials API access.
 
 ## Agent type
