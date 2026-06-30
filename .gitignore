@@ -29,3 +29,6 @@ Thumbs.db
 # Generated demo output
 out/
 *.evidence.json
+
+# Internal docs (not for public repo)
+docs/DEMO_SCRIPT.md
