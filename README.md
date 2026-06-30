@@ -1,116 +1,196 @@
-# Preflight — prove high-stakes plans before they touch a person
+# Preflight
 
 > **UiPath AgentHack 2026 · Track 3 — UiPath Test Cloud**
-> *Branch reality. Break the plan. Prove the outcome. Then act.*
-
-Preflight is an **agentic software-testing system** for the *outcome of a live case*. Before a high-stakes
-plan executes, it compiles the governing policy into **executable Test Manager test cases**, unleashes an
-adversarial agent to break every dependency, proves each obligation, records an auditable **evidence pack**
-with the causal failure chain in **UiPath Data Fabric**, and **gates release** behind a human.
-
-Demo domain: **safe hospital discharge** (100% synthetic data). Preflight validates **operational readiness
-only** — it never diagnoses, prescribes, or changes medication, and a clinician approves every change.
+> Prove high-stakes plans before they touch a person. Branch reality. Break the plan. Prove the outcome. Then act.
 
 ---
 
-## The business problem
-Enterprises automate consequential, often **irreversible** actions — discharging a patient, settling a
-claim, running payroll, releasing a shipment. They execute **optimistically**: the workflow assumes every
-downstream dependency will hold. When one silently fails — the pharmacy is closed when transport arrives, a
-medication isn't covered, a follow-up was "recommended" but never booked — the failure is found *after* it
-has already harmed someone. **Software is tested before production; human-impacting plans are not.**
+## The Problem
 
-## What makes it different
-- vs. **agent-evaluation tools** (Giskard/LangSmith/Foundry): those test *the agent/model*. Preflight tests
-  *the planned real-world outcome of a specific case* and **gates the real action**.
-- vs. **UiPath Process Simulation**: that predicts aggregate efficiency from historical data. Preflight
-  proves *this one live case's* outcome obligations and produces an executable release gate.
+Mrs. Chen is 72. Hip replacement. Doctor signed the discharge papers. Transport booked. Medications prescribed. Everything looked fine.
 
-## How it works
+She went home. Two hours later, her daughter called the pharmacy. The medication was not there.
+
+Why? Transport was booked for 5:15 PM. The pharmacy closes at 5:00 PM. Nobody caught it because the transport, the prescription, and the pharmacy hours each lived in a different system.
+
+Software gets tested before it goes live. These plans do not. Preflight closes that gap.
+
+---
+
+## What Preflight Does
+
+Preflight is an agentic testing system for high-stakes, irreversible plans. Before a plan executes, it:
+
+1. Reads the governing policy and compiles it into outcome obligations
+2. Generates a live test case in UiPath Test Manager for every obligation, automatically
+3. Runs an adversarial chaos agent that finds hidden cross-system failure cascades
+4. Produces an auditable evidence pack with the exact causal chain
+5. Blocks release if anything critical fails, routes it to a human with a proposed fix
+6. After human approval, re-tests everything, releases, and stores a regression scenario
+
+Demo domain: **safe hospital discharge** using 100% synthetic data. Preflight validates operational readiness only. It never diagnoses, prescribes, or changes medication. A human approves every change.
+
+---
+
+## How It Works
+
+```mermaid
+flowchart LR
+    A([Live Case\n+ Policy]) --> B[COMPILE\nPolicy into obligations]
+    B --> C[GENERATE\nTest cases in Test Manager]
+    C --> D[ATTACK\nChaos agent finds cascades]
+    D --> E[PROVE\nEvidence pack in Data Fabric]
+    E --> F{Critical\nfailure?}
+    F -- Yes --> G[GATE\nHuman approves remedy]
+    G --> D
+    F -- No --> H([RELEASE\n+ learn regression])
+
+    style B fill:#e8f5e9,stroke:#43a047
+    style C fill:#e3f2fd,stroke:#1e88e5
+    style D fill:#fce4ec,stroke:#e53935
+    style E fill:#fff8e1,stroke:#fb8c00
+    style G fill:#f3e5f5,stroke:#8e24aa
+    style H fill:#e0f7fa,stroke:#00897b
 ```
-Live case → COMPILE policy into outcome obligations
-          → GENERATE a Test Manager test case per obligation   (Test Cloud)
-          → CHAOS agent mutates dependencies, finds cross-system cascades
-          → PROVE each obligation → evidence pack + causal chain (Data Fabric)
-          → [GATE] Critical fail → human remedy → re-test ↺
-                   all pass     → Release → LEARN regression scenario
-```
 
-The hidden flaw in the demo case: transport arrives **17:15**, the pharmacy closes **17:00**, so a required
-medication can never be collected — a three-system cascade no static checklist catches.
+In the demo, patient PT-1041 looks ready to discharge. Preflight finds that transport arrives at 5:15 PM and the pharmacy closes at 5:00 PM, so the medication can never be collected. Discharge is blocked. A nurse approves switching to a 24-hour pharmacy. Preflight re-tests, passes 9 from 9, and releases.
 
-## UiPath components used
-| Component | Role in Preflight |
+---
+
+## UiPath Components Used
+
+| Component | Role |
 |---|---|
-| **UiPath Test Manager (Test Cloud)** | Agentic test-case generation — one severity-tagged test case per obligation, under the `Preflight` project. All 9 test cases linked to the governing **Requirement** (PRF:10 "Safe Discharge Readiness Policy") for full traceability from policy → test case. |
-| **UiPath Data Fabric (Data Service)** | System of record: `DischargeCase`, `Obligation`, `EvidencePack`, `HumanDecision`, `HelpContent`. Live query/insert/update via REST. No hardcoded data. |
-| **UiPath Agent Builder (Studio Web)** | Published low-code **Obligation Compiler** agent — turns a discharge plan + policy into structured obligations (the "requirements → test scenarios" step). |
-| **Coded agent** (UiPath for Coding Agents / Claude Code) | The rehearsal engine: compiler, chaos search, evaluator, remedy, evidence + the Data Fabric / Test Manager integrations. |
-| **External agent framework — LangGraph (LangChain)** | The adversarial **red-team agent** (`plan→attack→judge→record` StateGraph), governed by UiPath: reads the case and writes findings back to Data Fabric. |
-| **Live dashboard** | A backend-driven web dashboard reading Data Fabric + Test Manager live, with an `[i]` contextual help system served from the `HelpContent` entity. |
-| **UiPath Identity / External Applications** | OAuth client-credentials auth for all platform API access. |
-
-**Agent types: BOTH (and more).** Low-code (**Agent Builder** Obligation Compiler) **+** coded (rehearsal
-engine, built via **UiPath for Coding Agents**) **+** an **external framework** (LangGraph red-team agent)
-governed by UiPath. Claude Code (coding agent) built the solution — see
-[docs/CODING_AGENT_EVIDENCE.md](docs/CODING_AGENT_EVIDENCE.md).
-
-**Production roadmap (designed):** wrap the flow in a **Maestro BPMN** process with a **DMN** release gate
-and an **Action Center** nurse task; report results into Test Cloud via Orchestrator Test Automation.
+| **UiPath Test Manager (Test Cloud)** | Agentic test-case generation from policy: 9 severity-tagged test cases, all linked to Requirement PRF:10 for full policy-to-test traceability |
+| **UiPath Data Fabric (Data Service)** | Live system of record for every case, obligation, evidence pack, and human decision. Nothing hardcoded |
+| **UiPath Agent Builder (Studio Web)** | Published low-code Obligation Compiler agent that turns a discharge plan and policy into structured obligations |
+| **UiPath for Coding Agents (Claude Code)** | Built the entire rehearsal engine: chaos search, evaluator, remedy proposer, and all UiPath integrations |
+| **External framework: LangGraph** | Adversarial red-team agent that attacks the plan and writes findings back to Data Fabric, governed by UiPath |
+| **UiPath Identity / External Applications** | OAuth client-credentials securing all platform API access |
+| **Live dashboard** | Backend-driven web dashboard reading Data Fabric and Test Manager live, with contextual help from the HelpContent entity |
 
 ---
 
-## Repository layout
+## Agent Type
+
+**Both, and a blend of three.**
+
+- **Low-code agent**: UiPath Agent Builder hosts the Obligation Compiler agent
+- **Coded agent**: The entire rehearsal engine was built with Claude Code via UiPath for Coding Agents (bonus)
+- **External framework agent**: LangGraph red-team agent governed by UiPath Data Fabric
+
+This is the exact "blend native plus external plus coding agents" pattern the hackathon rewards.
+
+---
+
+## Repository Layout
+
 ```
 preflight/
-├── engine/            # platform-independent reference engine (pure stdlib, 6 passing tests)
-│   ├── models.py compiler.py chaos.py evaluator.py remedy.py evidence.py orchestrator.py
-├── integration/       # UiPath platform integration (live)
-│   ├── uipath_client.py   # OAuth + Data Fabric + Test Manager REST client
-│   ├── seed_data.py       # seed synthetic cases + help content into Data Fabric
-│   ├── rehearse_case.py    # rehearsal coded agent: block / release stages (writes back to Data Fabric)
-│   ├── tm_sync.py         # generate Test Manager test cases from a case's obligations
-│   ├── requirements_sync.py # link test cases to governing Requirement in Test Manager
-│   ├── redteam_agent.py   # external-framework (LangGraph) red-team agent, governed by UiPath
-│   ├── control_view.py    # live rehearsal status read from Data Fabric + Test Manager
-│   └── build_dashboard.py # generate the live web dashboard (HTML) from Data Fabric + Test Manager
-├── data/              # synthetic cases, discharge policy, help/tour content
-├── scripts/run_demo.py  tests/test_end_to_end.py
-└── docs/              # UiPath mapping, coding-agent evidence, demo script, Devpost, deck
+├── engine/              # Platform-independent reference engine (pure stdlib, 6 passing tests)
+│   ├── models.py        # Data models
+│   ├── compiler.py      # Policy to obligations
+│   ├── chaos.py         # Adversarial dependency search
+│   ├── evaluator.py     # Obligation evaluation
+│   ├── remedy.py        # Operational remedy proposer
+│   ├── evidence.py      # Evidence pack builder
+│   └── orchestrator.py  # End-to-end orchestration
+├── integration/         # UiPath platform integration (live)
+│   ├── uipath_client.py      # OAuth + Data Fabric + Test Manager REST client
+│   ├── seed_data.py          # Seed synthetic cases into Data Fabric
+│   ├── rehearse_case.py      # Rehearsal agent: block / release stages
+│   ├── tm_sync.py            # Generate Test Manager test cases
+│   ├── requirements_sync.py  # Link test cases to governing Requirement
+│   ├── redteam_agent.py      # LangGraph red-team agent
+│   ├── control_view.py       # Live status from Data Fabric and Test Manager
+│   └── build_dashboard.py    # Generate live web dashboard
+├── data/                # Synthetic cases, discharge policy, help content
+├── tests/               # End-to-end tests (6/6 passing)
+└── docs/                # Architecture, coding-agent evidence, Devpost
 ```
 
-## Prerequisites
-- Python 3.10+ (no third-party packages required).
-- For the **platform** parts: a UiPath Automation Cloud tenant with Data Fabric + Test Manager, an External
-  Application (client-credentials) with `DataFabric.Data.*` and `TM.*` scopes, and a `Preflight` Test Manager
-  project. Copy `integration/.env.example` → `integration/.env` and fill in your App ID/secret.
+---
 
-## Run it
-**Offline reference engine (no platform needed):**
+## Setup Instructions
+
+### Prerequisites
+
+- Python 3.10 or higher (no third-party packages for the reference engine)
+- A UiPath Automation Cloud tenant with Data Fabric and Test Manager enabled
+- An External Application (OAuth client-credentials) with `DataFabric.Data.*` and `TM.*` scopes
+- A Test Manager project named `Preflight`
+
+### Step 1: Clone the repo
+
 ```bash
+git clone https://github.com/usv240/preflight.git
 cd preflight
-python tests/test_end_to_end.py            # 6/6 tests
-python scripts/run_demo.py golden_case      # narrated block → remedy → re-test → release
 ```
 
-**On the UiPath platform (with `.env` configured):**
+### Step 2: Run the reference engine (no platform needed)
+
+This works offline with zero setup. Proves the core logic instantly.
+
 ```bash
-python integration/seed_data.py            # seed Data Fabric (one-time)
-python integration/tm_sync.py              # generate Test Manager test cases
-python integration/requirements_sync.py    # link test cases to governing Requirement (policy traceability)
-python integration/rehearse_case.py block   # rehearse → catch flaw → BLOCK the case
-python integration/redteam_agent.py         # external-framework (LangGraph) red-team attacks (writes findings to Data Fabric)
-python integration/build_dashboard.py       # generate the live web dashboard (out/preflight_dashboard.html)
-python integration/control_view.py          # live status: RED / Blocked + causal chain
-python integration/rehearse_case.py release # apply approved remedy → re-test → RELEASE
-python integration/build_dashboard.py        # regenerate → dashboard flips to GREEN / Released
-```
-Open `out/preflight_dashboard.html` in a browser for the backend-driven UI with `[i]` help.
-External-framework agent needs `pip install -r integration/requirements.txt` (langgraph).
+python tests/test_end_to_end.py
+# Expected: 6/6 tests pass
 
-## Safety & data
-100% synthetic data; no real PHI/PII. Preflight validates **operational readiness only**; it does **not**
-diagnose, prescribe, or change medication. Every clinical decision stays with a human.
+python scripts/run_demo.py golden_case
+# Narrated block, remedy, re-test, release
+```
+
+### Step 3: Configure platform credentials
+
+```bash
+cp integration/.env.example integration/.env
+# Fill in your UiPath App ID, App Secret, and tenant URL
+```
+
+### Step 4: Run on the UiPath platform
+
+```bash
+# Seed synthetic patient data into Data Fabric (run once)
+python integration/seed_data.py
+
+# Generate 9 test cases in Test Manager
+python integration/tm_sync.py
+
+# Link all test cases to the governing Requirement (PRF:10)
+python integration/requirements_sync.py
+
+# Block the case (simulates the transport/pharmacy failure)
+python integration/rehearse_case.py block
+
+# See the live status: RED, Blocked, causal chain
+python integration/control_view.py
+
+# Run the LangGraph red-team agent
+python integration/redteam_agent.py
+
+# Generate the live dashboard
+python integration/build_dashboard.py
+# Open out/preflight_dashboard.html in a browser
+
+# Apply the nurse-approved remedy and re-test
+python integration/rehearse_case.py release
+
+# Confirm GREEN, Released, 100%
+python integration/control_view.py
+
+# Regenerate dashboard to show GREEN state
+python integration/build_dashboard.py
+```
+
+LangGraph agent requires: `pip install -r integration/requirements.txt`
+
+---
+
+## Safety and Data
+
+100% synthetic data. No real PHI or PII anywhere. Preflight validates operational readiness only. It does not diagnose, prescribe, or change medication. Every clinical decision stays with a human.
+
+---
 
 ## License
-MIT — see [LICENSE](LICENSE).
+
+MIT. See [LICENSE](LICENSE).
