@@ -35,22 +35,24 @@ Demo domain: **safe hospital discharge** using 100% synthetic data. Preflight va
 ## How It Works
 
 ```mermaid
-flowchart LR
-    A([Live Case\n+ Policy]) --> B[COMPILE\nPolicy into obligations]
+flowchart TD
+    A([Live Case + Policy]) --> B[COMPILE\nPolicy into obligations]
     B --> C[GENERATE\nTest cases in Test Manager]
     C --> D[ATTACK\nChaos agent finds cascades]
     D --> E[PROVE\nEvidence pack in Data Fabric]
-    E --> F{Critical\nfailure?}
+    E --> F{Critical failure?}
     F -- Yes --> G[GATE\nHuman approves remedy]
     G --> D
-    F -- No --> H([RELEASE\n+ learn regression])
+    F -- No --> H([RELEASE + learn regression])
 
-    style B fill:#e8f5e9,stroke:#43a047
-    style C fill:#e3f2fd,stroke:#1e88e5
-    style D fill:#fce4ec,stroke:#e53935
-    style E fill:#fff8e1,stroke:#fb8c00
-    style G fill:#f3e5f5,stroke:#8e24aa
-    style H fill:#e0f7fa,stroke:#00897b
+    style A fill:#1a1a2e,color:#ffffff,stroke:#ffffff
+    style B fill:#2e7d32,color:#ffffff,stroke:#43a047
+    style C fill:#1565c0,color:#ffffff,stroke:#1e88e5
+    style D fill:#b71c1c,color:#ffffff,stroke:#e53935
+    style E fill:#e65100,color:#ffffff,stroke:#fb8c00
+    style F fill:#4a148c,color:#ffffff,stroke:#8e24aa
+    style G fill:#6a1b9a,color:#ffffff,stroke:#8e24aa
+    style H fill:#004d40,color:#ffffff,stroke:#00897b
 ```
 
 In the demo, patient PT-1041 looks ready to discharge. Preflight finds that transport arrives at 5:15 PM and the pharmacy closes at 5:00 PM, so the medication can never be collected. Discharge is blocked. A nurse approves switching to a 24-hour pharmacy. Preflight re-tests, passes 9 from 9, and releases.
